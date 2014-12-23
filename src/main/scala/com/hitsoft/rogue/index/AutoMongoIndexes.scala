@@ -11,7 +11,7 @@ trait AutoMongoIndexes[M] extends MongoMeta[M] with IndexedRecord[M] {
   def ensureIndexes(): Unit = {
     for (idx <- mongoIndexList) {
       val keys = idx.asListMap.map { case (k, v) => (k, v.asInstanceOf[Int]) }
-      ensureIndex(keys, unique = mongoIndexUniqueList.contains(idx))
+      createIndex(keys, unique = mongoIndexUniqueList.contains(idx))
     }
   }
 }
